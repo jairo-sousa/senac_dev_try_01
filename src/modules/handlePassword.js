@@ -11,7 +11,7 @@ const hashPassword = async (password) => {
   }
 };
 
-const passwordMatch = async (enteredPassword, storedHash) => {
+const comparePassword = async (enteredPassword, storedHash) => {
   try {
     const result = await bcrypt.compare(enteredPassword, storedHash);
     return result;
@@ -23,5 +23,5 @@ const passwordMatch = async (enteredPassword, storedHash) => {
 
 module.exports = {
   hashPassword,
-  passwordMatch,
+  comparePassword,
 };

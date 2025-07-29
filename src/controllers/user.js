@@ -6,7 +6,7 @@ class UserController {
     return userModel
       .getById(id)
       .then((users) => {
-        return users;
+        return users[0];
       })
       .catch((error) => {
         throw new Error("Erro ao buscar usuário: ", error);
@@ -17,7 +17,7 @@ class UserController {
     return userModel
       .getByEmail(email)
       .then((users) => {
-        return users;
+        return users[0];
       })
       .catch((error) => {
         throw new Error("Erro ao buscar usuário: ", error);

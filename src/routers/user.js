@@ -1,16 +1,45 @@
-const { Router } = require("express");
+const { Router, request } = require("express");
+const { comparePassword } = require("../modules/handlePassword");
 const userRouter = Router();
 
 const userController = require("../controllers/user");
-const user = require("../models/user");
 
 // USER
+
+userRouter.post("/users/auth", async (req, reply) => {
+  const { password, email } = req.body;
+
+  const findUser = await userController.getByEmail(email);
+
+  if (!findUser)
+    return reply.status(401).send({ message: "Credencial inválida" });
+
+  const passwordMatch = comparePassword(password, findUser.password);
+  if (!passwordMatch)
+    return reply.status(401).send({ message: "Credencial inválida" });
+
+  req.session.authenticated = true;
+  req.session.userId = findUser.id;
+
+  reply.redirect("/dashboard");
+});
+
+userRouter.get("/user/auth/status", async (req, reply) => {
+  const { cookie, id } = req.session;
+
+  if (id) {
+    return reply.status(200).send({ cookie, id });
+  }
+
+  return reply.status(400).send("Não autenticado");
+});
+
 userRouter.get("/users/:id", async (req, reply) => {
   const { id } = req.params;
 
-  const users = await userController.getById(id);
+  const user = await userController.getById(id);
 
-  return reply.status(200).send(users[0]);
+  return reply.status(200).send(user);
 });
 
 // CRUD

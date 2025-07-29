@@ -4,7 +4,8 @@ const decryptedUser = `
     id,
     CONVERT(AES_DECRYPT(email, '${DB_SECRET}') USING utf8) AS email,
     CONVERT(AES_DECRYPT(cpf, '${DB_SECRET}') USING utf8) AS cpf,
-    name
+    name,
+    password
 `;
 
 const getAll = `
