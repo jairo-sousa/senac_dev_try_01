@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>SENAC MUSIC HALL</title>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="global.css" />
+
+    <!-- FONT INTER -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- SCRIPT -->
+    <script src="main.js" defer></script>
+  </head>
+  <body>
+    <main>
+      <p>Logo</p>
+
+      <p>Autenticação</p>
+
+      <form id="login-form">
+        <div>
+          <label for="email">Email</label>
+          <input
+            type="text"
+            id="email"
+            placeholder="Digite o email"
+            autocomplete="email"
+          />
+        </div>
+
+        <div>
+          <label for="password">Senha</label>
+          <input
+            type="password"
+            id="password"
+            placeholder="Digite a senha"
+            autocomplete="current-password"
+          />
+        </div>
+
+        <button type="button" onclick="{auth()}">Entrar</button>
+
+        <div>Esqueceu a senha? <span>Clique aqui.</span></div>
+      </form>
+    </main>
+  </body>
+</html>
