@@ -17,7 +17,7 @@ viewRouter.get("/logout", (req, reply) => {
 });
 
 viewRouter.get("/", ensureAuthenticated, (req, reply) => {
-  const { profile_id } = req.session
+  const { profile_id } = req.session.user
 
   if (profile_id === 1) return reply.redirect("/view/dashboard");
   if (profile_id === 2) return reply.redirect("/view/sales");
@@ -30,40 +30,40 @@ viewRouter.get("/", ensureAuthenticated, (req, reply) => {
 
 viewRouter.get("/view/dashboard", ensureAuthenticated, authorizeRoles([1])
   , (req, reply) => {
-    reply.render("dashboard");
+    reply.render("dashboard", { user: req.session.user });
   });
 
 viewRouter.get("/view/users", ensureAuthenticated, authorizeRoles([1])
   , (req, reply) => {
-    reply.status(200).send({ view: "users" })
+    reply.render("users", { user: req.session.user });
   });
 
 viewRouter.get("/view/events", ensureAuthenticated, authorizeRoles([1])
   , (req, reply) => {
-    reply.status(200).send({ view: "events" })
+    reply.render("events", { user: req.session.user });
   });
 
 viewRouter.get("/view/sectors", ensureAuthenticated, authorizeRoles([1])
   , (req, reply) => {
-    reply.status(200).send({ view: "sectors" })
+    reply.render("sectors", { user: req.session.user });
   });
 
 viewRouter.get("/view/clients", ensureAuthenticated, authorizeRoles([1])
   , (req, reply) => {
-    reply.status(200).send({ view: "clients" })
+    reply.render("clients", { user: req.session.user });
   });
 
 viewRouter.get("/view/sales", ensureAuthenticated, authorizeRoles([1, 2])
   , (req, reply) => {
 
-    reply.render("sales");
+    reply.render("sales", { user: req.session.user });
   });
 
 viewRouter.get("/view/tickets", ensureAuthenticated, authorizeRoles([1, 2, 3])
   , (req, reply) => {
 
     // TICKET OPTIONS BASED ON PROFILE ID 
-    reply.render("ticket", { profile_id: req.session.profile_id });
+    reply.render("tickets", { user: req.session.user });
 
   });
 

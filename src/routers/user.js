@@ -19,8 +19,7 @@ userRouter.post("/users/auth", async (req, reply) => {
     return reply.status(401).send({ message: "Credencial inválida" });
 
   req.session.authenticated = true;
-  req.session.userId = findUser.id;
-  req.session.profile_id = findUser.profile_id;
+  req.session.user = findUser
 
   reply.redirect("/");
 });

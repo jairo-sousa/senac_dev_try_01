@@ -10,8 +10,10 @@
 
     <main>
       <div>
-        <h1>Dashboard</h1>
-        <p>Seja bem vindo(a), <%= user.name.split(" ")[0] %>!</p>
+        <h1>Ingressos</h1>
+        <% if (user.profile_id==3) { %>
+          <p>Seja bem vindo(a), <%= user.name.split(" ")[0] %>!</p>
+        <% } %>
       </div>
     </main>
 </body>

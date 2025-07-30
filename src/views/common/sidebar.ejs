@@ -1,0 +1,18 @@
+<div class="sidebar">
+    <ul>
+        <% if (user.profile_id == 1) { %>
+            <li> <a href="/view/dashboard">Dashboard</a> </li>
+            <li> <a href="/view/users">Usuários</a> </li>
+            <li> <a href="/view/events">Eventos</a> </li>
+            <li> <a href="/view/sectors">Setores</a> </li>
+            <li> <a href="/view/clients">Clientes</a> </li>
+        <% } %>
+
+        <% if (user.profile_id == 1 || user.profile_id == 2) { %>    
+            <li> <a href="/view/sales">Vendas</a> </li>
+        <% } %>
+        
+        <li> <a href="/view/tickets">Ingressos</a> </li>
+        <li> <a href="/logout">Sair</a> </li>
+    </ul>
+</div>

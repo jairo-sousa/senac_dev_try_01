@@ -5,8 +5,8 @@ function ensureAuthenticated(req, res, next) {
 
 function authorizeRoles(allowedRoles) {
     return (req, res, next) => {
-        const { profile_id } = req.session;
-        console.log(profile_id)
+        const { profile_id } = req.session.user;
+        
         if (allowedRoles.includes(profile_id)) return next();
         return res.status(403).send("Acesso negado");
     };
