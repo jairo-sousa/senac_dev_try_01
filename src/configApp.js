@@ -4,16 +4,16 @@ const session = require("express-session");
 
 const SESSION_SECRET = process.env.SESSION_SECRET || "DB_SMH";
 
+const corsOptions = {
+  origin: "*",
+  methods: "GET,POST,PUT,DELETE",
+
+  allowedHeaders: "Content-Type,Authorization",
+};
+
 module.exports = (app, express) => {
   app.use(express.json());
-  app.use(express.urlencoded({ extends: true }));
-
-  const corsOptions = {
-    origin: "*",
-    methods: "GET,POST,PUT,DELETE",
-
-    allowedHeaders: "Content-Type,Authorization",
-  };
+  app.use(express.urlencoded({ extended: true }));
 
   app.use(cors(corsOptions));
 

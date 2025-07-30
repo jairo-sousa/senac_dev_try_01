@@ -24,7 +24,7 @@ userRouter.post("/users/auth", async (req, reply) => {
   reply.redirect("/dashboard");
 });
 
-userRouter.get("/user/auth/status", async (req, reply) => {
+userRouter.get("/users/auth/status", async (req, reply) => {
   const { cookie, id } = req.session;
 
   if (id) {
