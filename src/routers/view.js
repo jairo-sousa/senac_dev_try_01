@@ -33,11 +33,6 @@ viewRouter.get("/view/dashboard", ensureAuthenticated, authorizeRoles([1])
     reply.render("dashboard", { user: req.session.user });
   });
 
-viewRouter.get("/view/users", ensureAuthenticated, authorizeRoles([1])
-  , (req, reply) => {
-    reply.render("users", { user: req.session.user });
-  });
-
 viewRouter.get("/view/events", ensureAuthenticated, authorizeRoles([1])
   , (req, reply) => {
     reply.render("events", { user: req.session.user });

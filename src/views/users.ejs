@@ -3,6 +3,8 @@
 
 <head>
   <%- include('common/head'); %>
+
+    <script src="../user.js" defer></script>
 </head>
 
 <body>
@@ -11,7 +13,96 @@
     <main>
 
       <h1>Usuários</h1>
+
+      <div class="table-options">
+        <input autocomplete="off" type="text" id="userSearch" placeholder="Pesquisar">
+        <button type="button" onclick="{showCreateModal()}">Cadastrar</button>
+      </div>
+
+      <!-- TABLE -->
+      <table>
+        <thead>
+          <tr>
+            <th class="cell-column cell-center">Id</th>
+            <th class="cell-column">Email</th>
+            <th class="cell-column">Cpf</th>
+            <th class="cell-column">Perfil</th>
+            <th class="cell-column">Ações</th>
+          </tr>
+        </thead>
+        <tbody>
+
+          <% for (usr of users) { %>
+            <tr>
+              <td class="cell-row"> <%- usr.id; %> </td>
+              <td class="cell-row"> <%- usr.email; %> </td>
+              <td class="cell-row"> <%- usr.cpf; %> </td>
+              <td class="cell-row"> <%- usr.profile_name; %> </td>
+
+              <td class="cell-row">
+                <button class="edit-btn" data-user='<%- JSON.stringify(usr) %>' onclick="showEditModal(this)">
+                  Editar
+                </button>
+                <button onclick="showConfirm(this)" data-id="<%- usr.id %>">Remover</button>
+              </td>
+            </tr>
+            <% } %>
+
+        </tbody>
+      </table>
     </main>
+
+    <!-- MODAL -->
+    <dialog closedby="any" id="modalUser">
+      <form onsubmit="saveUser(event)">
+        <div class="modal-header">
+          <p>Usuário</p>
+          <button onclick="{closeModal()}" type="button">Fechar</button>
+        </div>
+
+        <div class="modal-body">
+          <div>
+            <label for="name">Nome</label>
+            <input autocomplete="name" type="text" id="name" name="name" required placeholder="Digite o nome">
+
+          </div>
+
+          <div>
+            <label for="email">Email</label>
+            <input autocomplete="email" type="text" id="email" name="email" required placeholder="Digite o email">
+          </div>
+
+          <div>
+            <label for="cpf">Cpf</label>
+            <input autocomplete="off" type="text" id="cpf" name="cpf" required placeholder="Digite o cpf">
+
+          </div>
+
+          <div>
+            <label for="password">Senha</label>
+            <input autocomplete="off" type="password" id="password" name="password" placeholder="Digite o senha">
+
+          </div>
+
+          <label for="profile_id">Perfil</label>
+          <select name="profile_id" id="profile_id">
+            <option value="3">Validador</option>
+            <option value="2">Vendedor</option>
+            <option value="1">Administrador</option>
+          </select>
+        </div>
+
+        <div class="modal-footer">
+          <button onclick="{closeModal()}" type="button">Cancelar</button>
+          <button type="submit">Salvar</button>
+        </div>
+      </form>
+    </dialog>
+
+    <dialog closedby="any" id="confirmModal">
+      <button onclick="{declineModal()}" type="button">Cancelar</button>
+      <button type="submit" onclick="{removeUser()}">Excluir</button>
+    </dialog>
 </body>
 
 </html>

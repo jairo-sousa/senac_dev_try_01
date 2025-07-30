@@ -1,8 +1,24 @@
 const { Router } = require("express");
 const { comparePassword } = require("../modules/handlePassword");
-const userRouter = Router();
+const { ensureAuthenticated, authorizeRoles } = require("../authMiddleware");
 
+const { idToProfile } = require("../modules/userHelper")
+
+const userRouter = Router();
 const userController = require("../controllers/user");
+const userModel = require("../models/user");
+
+// VIEW
+userRouter.get("/view/users", ensureAuthenticated, authorizeRoles([1])
+  , (req, reply) => {
+    const response = userModel.getAll();
+    response
+      .then((users) => reply.status(200).render("users", {
+        user: req.session.user, users
+      })
+      )
+      .catch((error) => reply.status(500).render("error", { error }))
+  });
 
 // USER
 
@@ -19,7 +35,8 @@ userRouter.post("/users/auth", async (req, reply) => {
     return reply.status(401).send({ message: "Credencial inválida" });
 
   req.session.authenticated = true;
-  req.session.user = findUser
+  const profile_name = idToProfile(findUser.profile_id)
+  req.session.user = { ...findUser, profile_name }
 
   reply.redirect("/");
 });
