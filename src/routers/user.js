@@ -1,4 +1,4 @@
-const { Router, request } = require("express");
+const { Router } = require("express");
 const { comparePassword } = require("../modules/handlePassword");
 const userRouter = Router();
 
@@ -20,8 +20,9 @@ userRouter.post("/users/auth", async (req, reply) => {
 
   req.session.authenticated = true;
   req.session.userId = findUser.id;
+  req.session.profile_id = findUser.profile_id;
 
-  reply.redirect("/dashboard");
+  reply.redirect("/");
 });
 
 userRouter.get("/users/auth/status", async (req, reply) => {

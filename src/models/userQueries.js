@@ -5,7 +5,8 @@ const decryptedUser = `
     CONVERT(AES_DECRYPT(email, '${DB_SECRET}') USING utf8) AS email,
     CONVERT(AES_DECRYPT(cpf, '${DB_SECRET}') USING utf8) AS cpf,
     name,
-    password
+    password,
+    profile_id
 `;
 
 const getAll = `
@@ -36,10 +37,10 @@ const remove = `
 `;
 
 module.exports = {
-  getAll,
-  getByEmail,
-  getById,
-  post,
-  update,
-  remove,
+    getAll,
+    getByEmail,
+    getById,
+    post,
+    update,
+    remove,
 };
