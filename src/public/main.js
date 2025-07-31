@@ -1,14 +1,18 @@
 console.log("+++++++ SENAC MUSIC HALL +++++++");
 
-const postFormData = async (route, bodyObj) => {
+const sendFormData = async (route, method, bodyObj) => {
     const body = new URLSearchParams(bodyObj).toString()
 
     const response = await fetch(route, {
-        method: "POST",
+        method,
         headers: { "Content-Type": "application/x-www-form-urlencoded" },
         body,
         credentials: "include"
     })
 
-    return response
+    if (!response.ok) {
+        const errorText = await response.text();
+        console.error(`Erro ${response.status}: ${errorText}`);
+        return
+    }
 }

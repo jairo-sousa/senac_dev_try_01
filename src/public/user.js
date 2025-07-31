@@ -17,6 +17,7 @@ function showEditModal(button) {
 
     const user = JSON.parse(button.dataset.user)
     form.dataset.editing = "true";
+    form.dataset.userId = user.id;
 
     form.elements.name.value = user.name;
     form.elements.email.value = user.email;
@@ -43,17 +44,15 @@ async function saveUser(event) {
         delete user.password;
     }
 
-    console.log(form.dataset.editing == "true")
     if (form.dataset.editing == "true") {
-        console.log("Atualizar usuário:", user);
-    } else {
-        const response = await postFormData("/users", user)
+        const { userId } = form.dataset
 
-        if (!response.ok) {
-            const errorText = await response.text();
-            console.error(`Erro ${response.status}: ${errorText}`);
-            return
-        }
+        console.log({ user, userId })
+
+        const response = await sendFormData(`/users/${userId}`, "PUT", user)
+        window.location.reload()
+    } else {
+        const response = await sendFormData("/users", "POST", user)
         window.location.reload()
     }
 }

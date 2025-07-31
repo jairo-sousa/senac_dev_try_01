@@ -62,7 +62,7 @@ userRouter.get("/users/:id", async (req, reply) => {
 // CRUD
 userRouter.get("/users", userController.getAll);
 userRouter.post("/users", userController.post);
-userRouter.put("/users", userController.update);
+userRouter.put("/users/:id", userController.update);
 userRouter.delete("/users", userController.delete);
 
 module.exports = userRouter;

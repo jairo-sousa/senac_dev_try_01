@@ -8,7 +8,9 @@ class UserModel {
 
   post = (userSent) => runQuery(userQueries.post, userSent);
 
-  update = (userSent, id) => runQuery(userQueries.update, [userSent, id]);
+  update = (userSent, id) => runQuery(userQueries.update, [...userSent, id]);
+  updateWithPassword = (userSent, id) =>
+    runQuery(userQueries.updateWithPassword, [...userSent, id])
 
   delete = (id) => runQuery(userQueries.remove, id);
 }

@@ -30,7 +30,24 @@ const post = `
 `;
 
 const update = `
-    UPDATE user SET ? WHERE id = ?;
+    UPDATE user
+    SET
+        name = ?,
+        cpf = AES_ENCRYPT(?, '${DB_SECRET}'),
+        email = AES_ENCRYPT(?, '${DB_SECRET}'),
+        profile_id = ?
+    WHERE id = ?;
+`;
+
+const updateWithPassword = `
+    UPDATE user
+    SET
+        name = ?,
+        cpf = AES_ENCRYPT(?, '${DB_SECRET}'),
+        email = AES_ENCRYPT(?, '${DB_SECRET}'),
+        profile_id = ?,
+        password = ?
+    WHERE id = ?;
 `;
 
 const remove = `
@@ -43,5 +60,6 @@ module.exports = {
     getById,
     post,
     update,
+    updateWithPassword,
     remove,
 };

@@ -64,20 +64,28 @@ class UserController {
       });
   };
 
-  update = (req, reply) => {
-    const userSent = req.body;
+  update = async (req, reply) => {
     const { id } = req.params;
+    const { name, cpf, email, profile_id, password } = req.body;
 
-    userModel
-      .update(userSent, id)
-      .then(() => {
-        return reply.status(200).send("Usuário atualizado com sucesso");
-      })
-      .catch((error) => {
-        console.error(error);
-        return reply.status(500).send("Erro ao atualizar usuário");
-      });
+    const userSent = [name, cpf, email, profile_id];
+
+    try {
+      if (password) {
+        const hashedPassword = await hashPassword(password);
+        userSent.push(hashedPassword);
+        await userModel.updateWithPassword(userSent, id);
+      } else {
+        await userModel.update(userSent, id);
+      }
+
+      return reply.status(200).send("Usuário atualizado com sucesso");
+    } catch (error) {
+      console.error(error);
+      return reply.status(500).send("Erro ao atualizar usuário");
+    }
   };
+
 
   delete = (req, reply) => {
     const { id } = req.params;
