@@ -30,7 +30,7 @@ userRouter.post("/users/auth", async (req, reply) => {
   if (!findUser)
     return reply.status(401).send({ message: "Credencial inválida" });
 
-  const passwordMatch = comparePassword(password, findUser.password);
+  const passwordMatch = await comparePassword(password, findUser.password);
   if (!passwordMatch)
     return reply.status(401).send({ message: "Credencial inválida" });
 
