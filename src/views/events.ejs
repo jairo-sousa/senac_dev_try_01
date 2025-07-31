@@ -53,47 +53,37 @@
     <!-- MODAL -->
     <dialog closedby="any" id="dataModal">
       <form onsubmit="saveEvent(event)" data-userid="<%- user.id %>">
-        <div class="modal-header">
-          <p>Evento</p>
-          <button onclick="{closeModal()}" type="button">Fechar</button>
-        </div>
+        <!-- HEADER -->
+        <%- include('common/modalFooter') %>
 
-        <div class="modal-body">
-          <!-- NAME -->
-          <div>
-            <label for="name">Nome</label>
-            <input autocomplete="name" type="text" id="name" name="name" required placeholder="Digite o nome">
+          <div class="modal-body">
+            <!-- NAME -->
+            <div>
+              <label for="name">Nome</label>
+              <input autocomplete="name" type="text" id="name" name="name" required placeholder="Digite o nome">
+            </div>
+
+            <!-- DATE -->
+            <div>
+              <label for="date">Data</label>
+              <input autocomplete="on" type="date" id="date" name="date" required>
+            </div>
+
+            <!-- CAPACITY -->
+            <div>
+              <label for="capacity">Capacidade</label>
+              <input autocomplete="on" type="number" id="capacity" name="capacity" required
+                placeholder="Informe a capacidade">
+            </div>
           </div>
 
-          <!-- DATE -->
-          <div>
-            <label for="date">Data</label>
-            <input autocomplete="on" type="date" id="date" name="date" required>
-          </div>
-
-          <!-- CAPACITY -->
-          <div>
-            <label for="capacity">Capacidade</label>
-            <input autocomplete="on" type="number" id="capacity" name="capacity" required
-              placeholder="Informe a capacidade">
-          </div>
-        </div>
-
-        <div class="modal-footer">
-          <button onclick="{closeModal()}" type="button">Cancelar</button>
-          <button type="submit">Salvar</button>
-        </div>
+          <!-- FOOTER -->
+          <%- include('common/modalFooter') %>
       </form>
     </dialog>
 
-    <!-- MODAL CONFIRM -->
-    <dialog closedby="any" id="confirmModal">
-      <p>
-        Tem certeza disso?
-      </p>
-      <button onclick="{declineModal()}" type="button">Cancelar</button>
-      <button type="submit" onclick="{removeData('/events')}">Excluir</button>
-    </dialog>
+    <!-- CONFIRM MODAL -->
+    <%- include('common/confirmModal', { route: '/events' }) %>
 </body>
 
 </html>

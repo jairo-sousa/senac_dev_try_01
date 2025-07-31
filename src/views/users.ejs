@@ -53,55 +53,45 @@
     <!-- MODAL -->
     <dialog closedby="any" id="dataModal">
       <form onsubmit="saveUser(event)">
-        <div class="modal-header">
-          <p>Usuário</p>
-          <button onclick="{closeModal()}" type="button">Fechar</button>
-        </div>
+        <!-- HEADER -->
+        <%- include('common/modalFooter') %>
 
-        <div class="modal-body">
-          <div>
-            <label for="name">Nome</label>
-            <input autocomplete="name" type="text" id="name" name="name" required placeholder="Digite o nome">
+          <div class="modal-body">
+            <div>
+              <label for="name">Nome</label>
+              <input autocomplete="name" type="text" id="name" name="name" required placeholder="Digite o nome">
+            </div>
+
+            <div>
+              <label for="email">Email</label>
+              <input autocomplete="email" type="email" id="email" name="email" required placeholder="Digite o email">
+            </div>
+
+            <div>
+              <label for="cpf">Cpf</label>
+              <input autocomplete="on" type="text" id="cpf" name="cpf" required placeholder="Digite o cpf">
+            </div>
+
+            <div>
+              <label for="password">Senha</label>
+              <input autocomplete="on" type="password" id="password" name="password" placeholder="Digite o senha">
+            </div>
+
+            <label for="profile_id">Perfil</label>
+            <select name="profile_id" id="profile_id">
+              <option value="3">Validador</option>
+              <option value="2">Vendedor</option>
+              <option value="1">Administrador</option>
+            </select>
           </div>
 
-          <div>
-            <label for="email">Email</label>
-            <input autocomplete="email" type="email" id="email" name="email" required placeholder="Digite o email">
-          </div>
-
-          <div>
-            <label for="cpf">Cpf</label>
-            <input autocomplete="on" type="text" id="cpf" name="cpf" required placeholder="Digite o cpf">
-          </div>
-
-          <div>
-            <label for="password">Senha</label>
-            <input autocomplete="on" type="password" id="password" name="password" placeholder="Digite o senha">
-          </div>
-
-          <label for="profile_id">Perfil</label>
-          <select name="profile_id" id="profile_id">
-            <option value="3">Validador</option>
-            <option value="2">Vendedor</option>
-            <option value="1">Administrador</option>
-          </select>
-        </div>
-
-        <div class="modal-footer">
-          <button onclick="{closeModal()}" type="button">Cancelar</button>
-          <button type="submit">Salvar</button>
-        </div>
+          <!-- FOOTER -->
+          <%- include('common/modalFooter') %>
       </form>
     </dialog>
 
-    <!-- MODAL CONFIRM -->
-    <dialog closedby="any" id="confirmModal">
-      <p>
-        Tem certeza disso?
-      </p>
-      <button onclick="{declineModal()}" type="button">Cancelar</button>
-      <button type="submit" onclick="{removeData('/users')}">Excluir</button>
-    </dialog>
+    <!-- CONFIRM MODAL -->
+    <%- include('common/confirmModal', { route: '/users' }) %>
 </body>
 
 </html>

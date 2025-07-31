@@ -1,0 +1,11 @@
+<dialog closedby="any" id="confirmModal">
+    <p>Tem certeza disso?</p>
+    <button type="button" onclick="declineModal()">Cancelar</button>
+    <button id="removeDataBtn" type="submit" data-route="<%= route %>">Excluir</button>
+</dialog>
+
+<script>
+    const removeDataBtn = document.getElementById("removeDataBtn");
+    removeDataBtn.addEventListener("click"
+        , () => removeData(removeDataBtn.dataset.route))
+</script>
