@@ -9,14 +9,14 @@ const closeModal = () => modal.close()
 // CREATE - UPDATE
 function showCreateModal() {
     form.reset();
-    form.dataset.editing = false;
+    form.dataset.editing = "false";
     modal.showModal();
 }
 
 function showEditModal(button) {
 
     const user = JSON.parse(button.dataset.user)
-    form.dataset.editing = true;
+    form.dataset.editing = "true";
 
     form.elements.name.value = user.name;
     form.elements.email.value = user.email;
@@ -27,7 +27,7 @@ function showEditModal(button) {
     modal.showModal();
 }
 
-function saveUser(event) {
+async function saveUser(event) {
     event.preventDefault();
     const form = event.target;
 
@@ -43,12 +43,19 @@ function saveUser(event) {
         delete user.password;
     }
 
-    if (form.dataset.editing) {
+    console.log(form.dataset.editing == "true")
+    if (form.dataset.editing == "true") {
         console.log("Atualizar usuário:", user);
     } else {
-        console.log("Criar novo usuário:", user);
-    }
+        const response = await postFormData("/users", user)
 
+        if (!response.ok) {
+            const errorText = await response.text();
+            console.error(`Erro ${response.status}: ${errorText}`);
+            return
+        }
+        window.location.reload()
+    }
 }
 
 // REMOVE

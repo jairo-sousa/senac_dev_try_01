@@ -25,7 +25,8 @@ const getById = `
 `;
 
 const post = `
-    INSERT INTO user SET ?;
+    INSERT INTO user (name, cpf, email, password, profile_id)
+    VALUES (?, AES_ENCRYPT(?, '${DB_SECRET}'), AES_ENCRYPT(?, '${DB_SECRET}'), ?, ?);
 `;
 
 const update = `

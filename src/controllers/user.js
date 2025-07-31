@@ -1,4 +1,5 @@
 const userModel = require("../models/user");
+const { hashPassword } = require("../modules/handlePassword");
 
 class UserController {
   // USER
@@ -24,8 +25,7 @@ class UserController {
       });
   };
 
-  // TODO, VALIDATE + ENCRYPT CPF, EMAIL, PASSWORD
-
+  // TODO VALIDATE
   // CRUD
   getAll = (req, reply) => {
     const response = userModel.getAll();
@@ -40,8 +40,18 @@ class UserController {
       });
   };
 
-  post = (req, reply) => {
-    const userSent = req.body;
+  post = async (req, reply) => {
+    const { name, cpf, email, password, profile_id } = req.body
+
+    const hashedPassword = await hashPassword(password)
+
+    const userSent = [
+      name,
+      cpf,
+      email,
+      hashedPassword,
+      profile_id
+    ]
 
     userModel
       .post(userSent)
