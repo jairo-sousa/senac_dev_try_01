@@ -71,3 +71,19 @@ const removeUser = async () => {
     window.location.reload()
 }
 
+
+const input = document.getElementById('userSearch');
+
+input.addEventListener('input', function () {
+    const search = this.value.toLowerCase();
+    const rows = document.querySelectorAll('table tbody tr');
+
+    rows.forEach(row => {
+        const cells = row.querySelectorAll('td');
+        const match = Array.from(cells).some(cell =>
+            cell.textContent.toLowerCase().includes(search)
+        );
+
+        row.style.display = match ? '' : 'none';
+    });
+});

@@ -3,6 +3,8 @@
 
 <head>
   <%- include('common/head'); %>
+
+    <script src="../login.js" defer></script>
 </head>
 
 <body>
@@ -11,7 +13,7 @@
 
     <p>Autenticação</p>
 
-    <form method="POST" action="/users/auth">
+    <form method="POST" action="/users/auth" id="loginForm">
       <div>
         <label for="email">Email</label>
         <input type="text" id="email" name="email" placeholder="Digite o email" autocomplete="email" />
@@ -27,6 +29,8 @@
     </form>
 
   </main>
+
+
 </body>
 
 </html>
