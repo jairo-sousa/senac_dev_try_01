@@ -64,11 +64,10 @@ const showConfirm = (button) => {
     confirmModal.dataset.id = id
     confirmModal.showModal()
 }
-const removeUser = () => {
+const removeUser = async () => {
     const { id } = confirmModal.dataset
 
-    console.log("Remover: ", id)
-
-    confirmModal.close()
+    const response = await sendDeleteRequest(`/users/${id}`)
+    window.location.reload()
 }
 

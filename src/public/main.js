@@ -16,3 +16,16 @@ const sendFormData = async (route, method, bodyObj) => {
         return
     }
 }
+
+const sendDeleteRequest = async (route) => {
+    const response = await fetch(route, {
+        method: "DELETE",
+        credentials: "include"
+    })
+
+    if (!response.ok) {
+        const errorText = await response.text();
+        console.error(`Erro ${response.status}: ${errorText}`);
+        return
+    }
+}
