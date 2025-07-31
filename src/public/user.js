@@ -1,10 +1,9 @@
-const modal = document.getElementById("modalUser")
+const modal = document.getElementById("modal")
 const confirmModal = document.getElementById("confirmModal")
 
 const form = modal.querySelector("form");
 
 const closeModal = () => modal.close()
-
 
 // CREATE - UPDATE
 function showCreateModal() {
@@ -47,43 +46,26 @@ async function saveUser(event) {
     if (form.dataset.editing == "true") {
         const { userId } = form.dataset
 
-        console.log({ user, userId })
-
-        const response = await sendFormData(`/users/${userId}`, "PUT", user)
+        await sendFormData(`/users/${userId}`, "PUT", user)
         window.location.reload()
     } else {
-        const response = await sendFormData("/users", "POST", user)
+        await sendFormData("/users", "POST", user)
         window.location.reload()
     }
 }
 
 // REMOVE
 const declineModal = () => confirmModal.close()
+
 const showConfirm = (button) => {
     const { id } = button.dataset
     confirmModal.dataset.id = id
     confirmModal.showModal()
 }
+
 const removeUser = async () => {
     const { id } = confirmModal.dataset
 
-    const response = await sendDeleteRequest(`/users/${id}`)
+    await sendDeleteRequest(`/users/${id}`)
     window.location.reload()
 }
-
-
-const input = document.getElementById('userSearch');
-
-input.addEventListener('input', function () {
-    const search = this.value.toLowerCase();
-    const rows = document.querySelectorAll('table tbody tr');
-
-    rows.forEach(row => {
-        const cells = row.querySelectorAll('td');
-        const match = Array.from(cells).some(cell =>
-            cell.textContent.toLowerCase().includes(search)
-        );
-
-        row.style.display = match ? '' : 'none';
-    });
-});

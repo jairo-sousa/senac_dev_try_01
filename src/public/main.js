@@ -29,3 +29,21 @@ const sendDeleteRequest = async (route) => {
         return
     }
 }
+
+const searchInput = document.getElementById('tableSearchInput');
+
+if (searchInput) {
+    searchInput.addEventListener('input', function () {
+        const search = this.value.toLowerCase();
+        const rows = document.querySelectorAll('table tbody tr');
+
+        rows.forEach(row => {
+            const cells = row.querySelectorAll('td');
+            const match = Array.from(cells).some(cell =>
+                cell.textContent.toLowerCase().includes(search)
+            );
+
+            row.style.display = match ? '' : 'none';
+        });
+    });
+}
