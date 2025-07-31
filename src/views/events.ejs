@@ -5,6 +5,7 @@
   <%- include('common/head'); %>
 
     <script src="../event.js" defer></script>
+    <script src="../dataViews.js" defer></script>
 </head>
 
 <body>
@@ -50,7 +51,7 @@
     </main>
 
     <!-- MODAL -->
-    <dialog closedby="any" id="modal">
+    <dialog closedby="any" id="dataModal">
       <form onsubmit="saveEvent(event)" data-userid="<%- user.id %>">
         <div class="modal-header">
           <p>Evento</p>
@@ -91,7 +92,7 @@
         Tem certeza disso?
       </p>
       <button onclick="{declineModal()}" type="button">Cancelar</button>
-      <button type="submit" onclick="{removeEvent()}">Excluir</button>
+      <button type="submit" onclick="{removeData('/events')}">Excluir</button>
     </dialog>
 </body>
 

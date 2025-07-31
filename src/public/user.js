@@ -1,17 +1,4 @@
-const modal = document.getElementById("modal")
-const confirmModal = document.getElementById("confirmModal")
-
-const form = modal.querySelector("form");
-
-const closeModal = () => modal.close()
-
 // CREATE - UPDATE
-function showCreateModal() {
-    form.reset();
-    form.dataset.editing = "false";
-    modal.showModal();
-}
-
 function showEditModal(button) {
 
     const user = JSON.parse(button.dataset.user)
@@ -24,7 +11,7 @@ function showEditModal(button) {
     form.elements.password.value = ""
     form.elements.profile_id.value = user.profile_id;
 
-    modal.showModal();
+    datamModal.showModal();
 }
 
 async function saveUser(event) {
@@ -54,18 +41,4 @@ async function saveUser(event) {
     }
 }
 
-// REMOVE
-const declineModal = () => confirmModal.close()
 
-const showConfirm = (button) => {
-    const { id } = button.dataset
-    confirmModal.dataset.id = id
-    confirmModal.showModal()
-}
-
-const removeUser = async () => {
-    const { id } = confirmModal.dataset
-
-    await sendDeleteRequest(`/users/${id}`)
-    window.location.reload()
-}
