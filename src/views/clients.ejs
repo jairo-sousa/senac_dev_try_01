@@ -3,6 +3,9 @@
 
 <head>
   <%- include('common/head'); %>
+
+    <script src="../client.js" defer></script>
+    <script src="../dataViews.js" defer></script>
 </head>
 
 <body>
@@ -11,7 +14,72 @@
     <main>
 
       <h1>Clientes</h1>
+
+      <%- include('common/tableOptions'); %>
+
+        <!-- TABLE -->
+        <table>
+          <thead>
+            <tr>
+              <th class="cell-column cell-center">Id</th>
+              <th class="cell-column">Email</th>
+              <th class="cell-column">Cpf</th>
+              <th class="cell-column cell-center">Ações</th>
+            </tr>
+          </thead>
+          <tbody>
+
+            <% for (client of clients) { %>
+              <tr>
+                <td class="cell-row"> <%- client.id; %> </td>
+                <td class="cell-row"> <%- client.email; %> </td>
+                <td class="cell-row"> <%- client.cpf; %> </td>
+
+                <td class="cell-row">
+                  <button class="edit-btn" data-client='<%- JSON.stringify(client) %>' onclick="showEditModal(this)">
+                    Editar
+                  </button>
+                  <button onclick="showConfirm(this)" data-id="<%- client.id %>">Remover</button>
+                </td>
+              </tr>
+              <% } %>
+
+          </tbody>
+        </table>
     </main>
+
+    <!-- MODAL -->
+    <dialog closedby="any" id="dataModal">
+      <form onsubmit="saveClient(event)">
+        <!-- HEADER -->
+        <%- include('common/modalFooter') %>
+
+          <div class="modal-body">
+            <div>
+              <label for="name">Nome</label>
+              <input autocomplete="name" type="text" id="name" name="name" required placeholder="Digite o nome">
+            </div>
+
+            <div>
+              <label for="email">Email</label>
+              <input autocomplete="email" type="email" id="email" name="email" required placeholder="Digite o email">
+            </div>
+
+            <div>
+              <label for="cpf">Cpf</label>
+              <input autocomplete="on" oninput="mascara(this)" type="text" id="cpf" name="cpf" required
+                placeholder="Digite o cpf">
+            </div>
+
+          </div>
+
+          <!-- FOOTER -->
+          <%- include('common/modalFooter') %>
+      </form>
+    </dialog>
+
+    <!-- CONFIRM MODAL -->
+    <%- include('common/confirmModal', { route: '/clients' }) %>
 </body>
 
 </html>

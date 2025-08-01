@@ -3,6 +3,7 @@ const publicRouter = require("./public");
 const viewRouter = require("./view");
 const eventRouter = require("./event");
 const sectorRouter = require("./sector");
+const clientRouter = require("./client");
 
 module.exports = (app) => {
   app.use(publicRouter);
@@ -10,4 +11,5 @@ module.exports = (app) => {
   app.use(viewRouter);
   app.use(eventRouter);
   app.use(sectorRouter);
+  app.use(clientRouter);
 };
