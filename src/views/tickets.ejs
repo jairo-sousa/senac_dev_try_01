@@ -3,14 +3,20 @@
 
 <head>
   <%- include('common/head'); %>
+
+    <!-- HTML2PDF -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.8.0/html2pdf.bundle.min.js"
+      integrity="sha512-w3u9q/DeneCSwUDjhiMNibTRh/1i/gScBVp2imNVAMCt6cUHIw6xzhzcPFIaL3Q1EbI2l+nu17q2aLJJLo4ZYg=="
+      crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 </head>
 
 <body>
   <%- include('common/sidebar'); %>
 
-    <main>
+    <main id="testDownload">
       <div>
         <h1>Ingressos</h1>
+        <button onclick="download('testDownload', 'ingresso')">Clique para testar download</button>
         <% if (user.profile_id==3) { %>
           <p>Seja bem vindo(a), <%= user.name.split(" ")[0] %>!</p>
         <% } %>

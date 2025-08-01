@@ -30,3 +30,19 @@ const sendDeleteRequest = async (route) => {
         return
     }
 }
+
+
+// DOWNLOAD
+function download(id, name) {
+    const container = document.getElementById(id)
+
+    var options = {
+        margin: 1,
+        filename: `${name}.pdf`,
+        image: { type: 'jpeg', quality: 1 },
+        html2canvas: { scale: 2 },
+        jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' }
+    };
+
+    html2pdf(container, options);
+}
