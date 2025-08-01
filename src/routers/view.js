@@ -11,11 +11,6 @@ viewRouter.get("/view/dashboard", ensureAuthenticated, authorizeRoles([1])
     reply.render("dashboard", { user: req.session.user });
   });
 
-viewRouter.get("/view/sectors", ensureAuthenticated, authorizeRoles([1])
-  , (req, reply) => {
-    reply.render("sectors", { user: req.session.user });
-  });
-
 viewRouter.get("/view/clients", ensureAuthenticated, authorizeRoles([1])
   , (req, reply) => {
     reply.render("clients", { user: req.session.user });
